@@ -3,752 +3,1023 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090909">
+<meta name="theme-color" content="#050505">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<title>Dudol Garage</title>
+<title>Dudol Garage | Automotive</title>
 
 <style>
 *{
     box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    margin:0;
     background:#050505;
     color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    overflow-x:hidden;
 }
 
-.app{
-    max-width:430px;
-    min-height:100vh;
-    margin:auto;
-    background:#101010;
-    padding-bottom:90px;
+a{
+    color:inherit;
+    text-decoration:none;
 }
 
-header{
-    padding:24px 20px 12px;
+button{
+    font:inherit;
+}
+
+:root{
+    --red:#e10600;
+    --red2:#ff241c;
+    --dark:#050505;
+    --card:#101010;
+    --gray:#9b9b9b;
+    --line:#242424;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+    z-index:1000;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(5,5,5,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .logo{
     font-size:27px;
     font-weight:900;
     font-style:italic;
+    letter-spacing:-1.5px;
 }
 
 .logo span{
-    color:#e10600;
+    color:var(--red);
 }
 
-.notification{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    background:#181818;
-    border:1px solid #303030;
+.navlinks{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:19px;
+    gap:28px;
+    font-size:14px;
+    font-weight:600;
 }
+
+.navlinks a{
+    color:#ccc;
+    transition:.2s;
+}
+
+.navlinks a:hover{
+    color:#fff;
+}
+
+.navbutton{
+    background:var(--red);
+    padding:11px 18px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.menu{
+    display:none;
+    font-size:26px;
+}
+
+/* HERO */
 
 .hero{
-    margin:10px 16px 18px;
-    padding:25px 21px;
-    border-radius:22px;
-    border:1px solid #303030;
+    min-height:100vh;
+    padding:150px 7% 70px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
     background:
-        radial-gradient(circle at 100% 0%,rgba(225,6,0,.22),transparent 45%),
-        linear-gradient(145deg,#202020,#111);
+        radial-gradient(circle at 85% 35%,rgba(225,6,0,.25),transparent 30%),
+        radial-gradient(circle at 20% 80%,rgba(225,6,0,.08),transparent 30%),
+        #050505;
 }
 
-.hero-label{
-    color:#999;
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:1px;
+.hero:after{
+    content:"";
+    position:absolute;
+    right:-180px;
+    bottom:-280px;
+    width:650px;
+    height:650px;
+    border:1px solid rgba(225,6,0,.18);
+    border-radius:50%;
 }
 
-.hero h1{
-    margin:9px 0 8px;
-    font-size:32px;
-    line-height:1;
-}
-
-.hero p{
-    margin:0;
-    color:#aaa;
-    line-height:1.5;
-}
-
-.btn{
-    width:100%;
-    border:0;
-    border-radius:13px;
-    padding:15px;
-    margin-top:20px;
-    background:#e10600;
-    color:white;
-    font-size:14px;
-    font-weight:900;
-}
-
-.section{
-    padding:0 17px 20px;
-}
-
-.section-title{
-    font-size:19px;
-    font-weight:800;
-    margin-bottom:12px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.card{
-    background:#191919;
-    border:1px solid #2c2c2c;
-    border-radius:16px;
-    padding:16px;
-}
-
-.action{
-    min-height:125px;
-}
-
-.icon{
-    font-size:25px;
-}
-
-.card-title{
-    margin-top:11px;
-    font-weight:800;
-}
-
-.card-sub{
-    margin-top:5px;
-    color:#858585;
-    font-size:12px;
-    line-height:1.35;
-}
-
-.car{
-    display:flex;
-    align-items:center;
-    gap:14px;
-}
-
-.car-image{
-    width:70px;
-    height:52px;
-    border-radius:12px;
-    background:#292929;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:28px;
-}
-
-.car-info{
-    flex:1;
-}
-
-.car-name{
-    font-weight:800;
-}
-
-.car-details{
-    color:#888;
-    font-size:12px;
-    margin-top:5px;
+.hero-content{
+    max-width:850px;
+    position:relative;
+    z-index:2;
 }
 
 .badge{
-    background:#35100e;
-    color:#ff625d;
-    font-size:9px;
-    font-weight:900;
-    padding:6px 8px;
-    border-radius:7px;
-}
-
-.progress{
-    height:5px;
-    background:#2b2b2b;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-.progress span{
-    display:block;
-    width:68%;
-    height:100%;
-    background:#e10600;
-    border-radius:10px;
-}
-
-.job{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.job small{
-    display:block;
-    color:#888;
-    margin-top:7px;
-}
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(430px,100%);
-    height:78px;
-    background:#111;
-    border-top:1px solid #292929;
-    display:flex;
-    justify-content:space-around;
+    display:inline-flex;
     align-items:center;
-    z-index:10;
-}
-
-.nav{
-    color:#777;
-    text-align:center;
-    font-size:10px;
-    cursor:pointer;
-}
-
-.nav-icon{
-    font-size:21px;
-    margin-bottom:4px;
-}
-
-.nav.active{
-    color:white;
-}
-
-.page{
-    padding:20px;
-}
-
-.back{
-    color:#999;
-    margin-bottom:18px;
-    cursor:pointer;
-}
-
-.page h1{
-    margin:0 0 7px;
-    font-size:29px;
-}
-
-.page-sub{
-    color:#888;
-    margin-bottom:20px;
-}
-
-.option{
-    background:#191919;
+    gap:8px;
     border:1px solid #303030;
-    border-radius:13px;
-    padding:16px;
-    margin:9px 0;
-    cursor:pointer;
+    background:#0e0e0e;
+    padding:8px 13px;
+    border-radius:100px;
+    color:#bbb;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:25px;
 }
 
-.option.selected{
-    border-color:#e10600;
-    background:#25100f;
+.badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 12px var(--red);
 }
 
-.input{
-    width:100%;
-    margin-top:12px;
-    padding:14px;
-    border-radius:11px;
-    border:1px solid #333;
-    background:#181818;
-    color:white;
+.hero h1{
+    font-size:clamp(54px,9vw,115px);
+    line-height:.86;
+    letter-spacing:-6px;
+    text-transform:uppercase;
+    font-weight:950;
+}
+
+.hero h1 span{
+    color:var(--red);
+}
+
+.hero-sub{
+    max-width:620px;
+    margin-top:30px;
+    color:#aaa;
+    font-size:18px;
+    line-height:1.6;
+}
+
+.hero-actions{
+    display:flex;
+    gap:13px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 22px;
+    border-radius:9px;
+    font-weight:850;
+    font-size:14px;
+    transition:.25s;
+}
+
+.btn-red{
+    background:var(--red);
+}
+
+.btn-red:hover{
+    background:var(--red2);
+    transform:translateY(-2px);
+}
+
+.btn-outline{
+    border:1px solid #353535;
+    background:#0c0c0c;
+}
+
+.btn-outline:hover{
+    border-color:#666;
+    transform:translateY(-2px);
+}
+
+.stats{
+    display:flex;
+    gap:45px;
+    margin-top:55px;
+}
+
+.stat strong{
+    display:block;
+    font-size:28px;
+}
+
+.stat span{
+    color:#777;
+    font-size:12px;
+}
+
+/* SECTIONS */
+
+section{
+    padding:100px 7%;
+}
+
+.section-label{
+    color:var(--red);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:13px;
+}
+
+.section-title{
+    font-size:clamp(35px,5vw,65px);
+    letter-spacing:-3px;
+    line-height:1;
+    margin-bottom:18px;
+}
+
+.section-description{
+    max-width:650px;
+    color:#888;
+    line-height:1.7;
+}
+
+/* SERVICES */
+
+.services{
+    background:#090909;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:45px;
+}
+
+.service{
+    min-height:245px;
+    padding:28px;
+    background:linear-gradient(145deg,#151515,#0b0b0b);
+    border:1px solid var(--line);
+    border-radius:16px;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.service:hover{
+    transform:translateY(-6px);
+    border-color:#444;
+}
+
+.service:after{
+    content:"";
+    position:absolute;
+    right:-50px;
+    bottom:-70px;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border:1px solid rgba(225,6,0,.2);
+}
+
+.icon{
+    font-size:32px;
+    margin-bottom:35px;
+}
+
+.service h3{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.service p{
+    color:#858585;
+    line-height:1.6;
     font-size:14px;
 }
 
-.toast{
-    display:none;
-    position:fixed;
-    left:50%;
-    bottom:95px;
-    transform:translateX(-50%);
-    background:#e10600;
-    color:white;
-    padding:12px 18px;
-    border-radius:11px;
-    font-weight:800;
-    z-index:20;
+/* ABOUT */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-card{
+    min-height:430px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:
+        linear-gradient(135deg,rgba(225,6,0,.18),transparent 45%),
+        #0d0d0d;
+    display:flex;
+    align-items:flex-end;
+    padding:35px;
+    position:relative;
+    overflow:hidden;
+}
+
+.about-card:before{
+    content:"D";
+    position:absolute;
+    font-size:420px;
+    font-weight:950;
+    font-style:italic;
+    color:rgba(255,255,255,.025);
+    right:-35px;
+    top:-100px;
+}
+
+.about-card-content{
+    position:relative;
+    z-index:2;
+}
+
+.about-card h3{
+    font-size:34px;
+}
+
+.about-card p{
+    color:#999;
+    margin-top:8px;
+}
+
+.about-text p{
+    color:#929292;
+    line-height:1.8;
+    margin:25px 0;
+}
+
+.checks{
+    display:grid;
+    gap:13px;
+}
+
+.check{
+    color:#ccc;
+    font-size:14px;
+}
+
+.check span{
+    color:var(--red);
+    margin-right:8px;
+}
+
+/* PROCESS */
+
+.process{
+    background:#090909;
+}
+
+.process-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:45px;
+}
+
+.step{
+    padding:27px;
+    border-top:2px solid #2a2a2a;
+}
+
+.step-number{
+    color:var(--red);
+    font-size:13px;
+    font-weight:900;
+}
+
+.step h3{
+    margin:18px 0 9px;
+}
+
+.step p{
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* GALLERY */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    grid-auto-rows:220px;
+    gap:12px;
+    margin-top:45px;
+}
+
+.gallery-item{
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:
+        linear-gradient(135deg,rgba(225,6,0,.24),transparent),
+        linear-gradient(45deg,#171717,#080808);
+    position:relative;
+    overflow:hidden;
+}
+
+.gallery-item:first-child{
+    grid-row:span 2;
+}
+
+.gallery-item:after{
+    content:"DUDOL GARAGE";
+    position:absolute;
+    left:18px;
+    bottom:17px;
+    font-size:11px;
+    letter-spacing:2px;
+    font-weight:900;
+    color:rgba(255,255,255,.5);
+}
+
+/* CTA */
+
+.cta{
+    margin:20px 7% 100px;
+    padding:70px 8%;
+    border:1px solid #292929;
+    border-radius:22px;
+    background:
+        radial-gradient(circle at 90% 50%,rgba(225,6,0,.25),transparent 35%),
+        #0d0d0d;
+}
+
+.cta h2{
+    font-size:clamp(36px,5vw,65px);
+    line-height:1;
+    letter-spacing:-3px;
+    max-width:750px;
+}
+
+.cta p{
+    color:#888;
+    margin:20px 0 30px;
+}
+
+/* CONTACT */
+
+.contact{
+    background:#090909;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:45px;
+}
+
+.contact-card{
+    padding:28px;
+    border:1px solid var(--line);
+    border-radius:15px;
+    background:#101010;
+}
+
+.contact-card small{
+    color:#666;
+    display:block;
+    margin-bottom:8px;
+    text-transform:uppercase;
+    font-size:10px;
+    letter-spacing:1.5px;
+}
+
+.contact-card strong{
+    font-size:18px;
+}
+
+.whatsapp{
+    margin-top:25px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:45px 7%;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    border-top:1px solid #1b1b1b;
+    color:#666;
+    font-size:12px;
+}
+
+.footer-logo{
+    font-size:22px;
+    font-weight:900;
+    color:#fff;
+}
+
+.footer-logo span{
+    color:var(--red);
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .navbar{
+        height:64px;
+        padding:0 5%;
+    }
+
+    .navlinks,
+    .navbutton{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .hero{
+        padding:125px 6% 60px;
+        min-height:100svh;
+    }
+
+    .hero h1{
+        font-size:62px;
+        letter-spacing:-3px;
+    }
+
+    .hero-sub{
+        font-size:15px;
+    }
+
+    .stats{
+        gap:25px;
+        margin-top:40px;
+    }
+
+    .stat strong{
+        font-size:23px;
+    }
+
+    section{
+        padding:75px 6%;
+    }
+
+    .service-grid,
+    .process-grid,
+    .about,
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about{
+        gap:30px;
+    }
+
+    .about-card{
+        min-height:330px;
+    }
+
+    .process-grid{
+        gap:10px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+        grid-auto-rows:160px;
+    }
+
+    .gallery-item:first-child{
+        grid-column:span 2;
+        grid-row:span 1;
+    }
+
+    .cta{
+        margin:10px 6% 70px;
+        padding:45px 25px;
+    }
+
+    footer{
+        flex-direction:column;
+    }
+}
+
+/* SMALL PHONES */
+
+@media(max-width:430px){
+
+    .hero h1{
+        font-size:54px;
+    }
+
+    .stats{
+        gap:17px;
+    }
+
+    .stat strong{
+        font-size:20px;
+    }
+
+    .stat span{
+        font-size:10px;
+    }
+
+    .hero-actions{
+        display:grid;
+        grid-template-columns:1fr;
+    }
+
+    .btn{
+        width:100%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="app"></div>
+<header class="navbar">
+    <a href="#" class="logo">Dudol<span>Garage</span></a>
 
-<script>
+    <nav class="navlinks">
+        <a href="#servizi">Servizi</a>
+        <a href="#chi-siamo">Chi siamo</a>
+        <a href="#lavori">Lavori</a>
+        <a href="#contatti">Contatti</a>
+    </nav>
 
-let selectedService = "";
+    <a href="#contatti" class="navbutton">PRENOTA</a>
 
-function layout(content,active="home"){
-
-document.getElementById("app").innerHTML=`
-
-<div class="app">
-
-${content}
-
-<nav class="bottom">
-
-<div class="nav ${active==="home"?"active":""}" onclick="home()">
-<div class="nav-icon">⌂</div>
-Home
-</div>
-
-<div class="nav ${active==="garage"?"active":""}" onclick="garage()">
-<div class="nav-icon">🚗</div>
-Garage
-</div>
-
-<div class="nav ${active==="book"?"active":""}" onclick="booking()">
-<div class="nav-icon">＋</div>
-Prenota
-</div>
-
-<div class="nav ${active==="jobs"?"active":""}" onclick="jobs()">
-<div class="nav-icon">📋</div>
-Lavori
-</div>
-
-<div class="nav">
-<div class="nav-icon">👤</div>
-Profilo
-</div>
-
-</nav>
-
-<div id="toast" class="toast">
-Operazione completata ✓
-</div>
-
-</div>
-`;
-}
-
-
-function home(){
-
-layout(`
-
-<header>
-
-<div class="logo">
-<span>Dudol</span> Garage
-</div>
-
-<div class="notification">
-🔔
-</div>
-
+    <div class="menu">☰</div>
 </header>
 
 
+<main>
+
 <section class="hero">
 
-<div class="hero-label">
-DUDOL GARAGE
-</div>
+    <div class="hero-content">
 
-<h1>
-La tua auto.<br>
-Il nostro lavoro.
-</h1>
+        <div class="badge">
+            <i></i>
+            AUTOMOTIVE PERFORMANCE & CARE
+        </div>
 
-<p>
-Prenota interventi, richiedi preventivi e tieni sotto controllo la tua auto.
-</p>
+        <h1>
+            La tua auto.<br>
+            Il nostro<br>
+            <span>lavoro.</span>
+        </h1>
 
-<button class="btn" onclick="booking()">
-PRENOTA UN INTERVENTO
-</button>
+        <p class="hero-sub">
+            Dudol Garage nasce dalla passione per le auto e dalla voglia
+            di fare le cose diversamente. Officina, carrozzeria,
+            personalizzazione e cura dell'auto in un unico punto.
+        </p>
 
-</section>
+        <div class="hero-actions">
+            <a href="#contatti" class="btn btn-red">
+                PRENOTA UN INTERVENTO →
+            </a>
 
+            <a href="#servizi" class="btn btn-outline">
+                SCOPRI I SERVIZI
+            </a>
+        </div>
 
-<section class="section">
+        <div class="stats">
+            <div class="stat">
+                <strong>01</strong>
+                <span>GARAGE</span>
+            </div>
 
-<div class="section-title">
-Accesso rapido
-</div>
+            <div class="stat">
+                <strong>360°</strong>
+                <span>SERVIZIO AUTO</span>
+            </div>
 
-<div class="grid">
+            <div class="stat">
+                <strong>100%</strong>
+                <span>PASSIONE</span>
+            </div>
+        </div>
 
-<div class="card action" onclick="booking()">
-<div class="icon">🔧</div>
-<div class="card-title">Prenota</div>
-<div class="card-sub">
-Tagliandi, gomme, officina e altro
-</div>
-</div>
-
-<div class="card action">
-<div class="icon">💰</div>
-<div class="card-title">Preventivo</div>
-<div class="card-sub">
-Invia foto e descrizione
-</div>
-</div>
-
-<div class="card action" onclick="garage()">
-<div class="icon">🚗</div>
-<div class="card-title">Il mio Garage</div>
-<div class="card-sub">
-Gestisci le tue auto
-</div>
-</div>
-
-<div class="card action" onclick="jobs()">
-<div class="icon">📋</div>
-<div class="card-title">I miei lavori</div>
-<div class="card-sub">
-Storico interventi
-</div>
-</div>
-
-</div>
-</section>
-
-
-<section class="section">
-
-<div class="section-title">
-La tua auto
-</div>
-
-<div class="card car">
-
-<div class="car-image">
-🏎️
-</div>
-
-<div class="car-info">
-
-<div class="car-name">
-Toyota Supra A90
-</div>
-
-<div class="car-details">
-72.000 km
-</div>
-
-<div class="progress">
-<span></span>
-</div>
-
-</div>
-
-<div class="badge">
-ATTIVA
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<section class="section">
+<section class="services" id="servizi">
 
-<div class="section-title">
-Ultimo intervento
-</div>
+    <div class="section-label">Cosa facciamo</div>
 
-<div class="card job">
+    <h2 class="section-title">
+        Un garage.<br>
+        Infinite possibilità.
+    </h2>
 
-<div>
+    <p class="section-description">
+        Dalla manutenzione ordinaria alla personalizzazione completa:
+        lavoriamo sulla tua auto con un approccio preciso, diretto e senza
+        compromessi.
+    </p>
 
-<strong>
-Controllo generale
-</strong>
+    <div class="service-grid">
 
-<small>
-Toyota Supra A90
-</small>
+        <article class="service">
+            <div class="icon">🔧</div>
+            <h3>Officina</h3>
+            <p>
+                Tagliandi, manutenzione, freni, sospensioni,
+                pneumatici e interventi meccanici.
+            </p>
+        </article>
 
-<small>
-Dudol Garage
-</small>
+        <article class="service">
+            <div class="icon">🎨</div>
+            <h3>Carrozzeria</h3>
+            <p>
+                Ripristino, verniciatura e cura estetica
+                per riportare la tua auto al massimo.
+            </p>
+        </article>
 
-</div>
+        <article class="service">
+            <div class="icon">🧲</div>
+            <h3>Wrap</h3>
+            <p>
+                Pellicole, cambio colore e personalizzazioni
+                pensate per rendere unica ogni vettura.
+            </p>
+        </article>
 
-<div class="badge">
-COMPLETATO
-</div>
+        <article class="service">
+            <div class="icon">🛡️</div>
+            <h3>PPF</h3>
+            <p>
+                Protezione della carrozzeria con pellicole
+                specifiche per preservare la vernice.
+            </p>
+        </article>
 
-</div>
+        <article class="service">
+            <div class="icon">⚡</div>
+            <h3>Elettronica</h3>
+            <p>
+                Diagnosi elettronica, codifiche, installazioni
+                e soluzioni dedicate alla tua vettura.
+            </p>
+        </article>
+
+        <article class="service">
+            <div class="icon">🏁</div>
+            <h3>Performance</h3>
+            <p>
+                Soluzioni dedicate a chi vuole migliorare
+                risposta, prestazioni e carattere dell'auto.
+            </p>
+        </article>
+
+    </div>
 
 </section>
 
-`);
-}
 
+<section class="about" id="chi-siamo">
 
-function garage(){
+    <div class="about-card">
 
-layout(`
+        <div class="about-card-content">
+            <div class="section-label">Dudol Garage</div>
+            <h3>Non siamo<br>il solito garage.</h3>
+            <p>Competenza, passione e attenzione ai dettagli.</p>
+        </div>
 
-<div class="page">
+    </div>
 
-<div class="back" onclick="home()">
-‹ Home
-</div>
+    <div class="about-text">
 
-<h1>
-Il mio Garage
-</h1>
+        <div class="section-label">Il nostro approccio</div>
 
-<div class="page-sub">
-I tuoi veicoli
-</div>
+        <h2 class="section-title">
+            Prima l'auto.<br>
+            Poi tutto il resto.
+        </h2>
 
+        <p>
+            Ogni macchina ha esigenze diverse. Per questo analizziamo
+            il lavoro, parliamo con il cliente e cerchiamo la soluzione
+            più corretta senza complicare inutilmente le cose.
+        </p>
 
-<div class="card car">
+        <div class="checks">
+            <div class="check"><span>✓</span> Diagnosi e valutazione del problema</div>
+            <div class="check"><span>✓</span> Preventivo chiaro</div>
+            <div class="check"><span>✓</span> Lavorazioni curate nei dettagli</div>
+            <div class="check"><span>✓</span> Un unico punto di riferimento</div>
+        </div>
 
-<div class="car-image">
-🏎️
-</div>
+    </div>
 
-<div class="car-info">
+</section>
 
-<div class="car-name">
-Toyota Supra A90
-</div>
 
-<div class="car-details">
-Targa ••••123
-</div>
+<section class="process">
 
-<div class="car-details">
-72.000 km
-</div>
+    <div class="section-label">Come lavoriamo</div>
 
-</div>
+    <h2 class="section-title">Semplice. Diretto.</h2>
 
-</div>
+    <div class="process-grid">
 
+        <div class="step">
+            <span class="step-number">01 —</span>
+            <h3>Contatto</h3>
+            <p>
+                Ci racconti cosa vuoi fare o quale problema presenta la tua auto.
+            </p>
+        </div>
 
-<button class="btn" onclick="alert('Funzione in sviluppo')">
-+ AGGIUNGI VEICOLO
-</button>
+        <div class="step">
+            <span class="step-number">02 —</span>
+            <h3>Valutazione</h3>
+            <p>
+                Analizziamo il lavoro e definiamo insieme la soluzione.
+            </p>
+        </div>
 
-</div>
+        <div class="step">
+            <span class="step-number">03 —</span>
+            <h3>Lavorazione</h3>
+            <p>
+                Ci mettiamo al lavoro con precisione e attenzione.
+            </p>
+        </div>
 
-`,"garage");
+        <div class="step">
+            <span class="step-number">04 —</span>
+            <h3>Consegna</h3>
+            <p>
+                Ti restituiamo la tua auto pronta per tornare su strada.
+            </p>
+        </div>
 
-}
+    </div>
 
+</section>
 
-function booking(){
 
-selectedService="";
+<section id="lavori">
 
-layout(`
+    <div class="section-label">Portfolio</div>
 
-<div class="page">
+    <h2 class="section-title">Alcuni dei nostri lavori.</h2>
 
-<div class="back" onclick="home()">
-‹ Home
-</div>
+    <p class="section-description">
+        Questa sezione diventerà la nostra vetrina: qui inseriremo
+        foto e video reali delle auto lavorate da Dudol Garage.
+    </p>
 
-<h1>
-Prenota
-</h1>
+    <div class="gallery-grid">
 
-<div class="page-sub">
-Scegli il tipo di intervento
-</div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
+        <div class="gallery-item"></div>
 
+    </div>
 
-<div class="option" onclick="selectService(this)">
-🔧 &nbsp; Tagliando
-</div>
+</section>
 
-<div class="option" onclick="selectService(this)">
-🛞 &nbsp; Pneumatici
-</div>
 
-<div class="option" onclick="selectService(this)">
-🎨 &nbsp; Wrap / PPF
-</div>
+<div class="cta">
 
-<div class="option" onclick="selectService(this)">
-⚡ &nbsp; Diagnosi / Elettronica
-</div>
+    <div class="section-label">La tua prossima modifica</div>
 
-<div class="option" onclick="selectService(this)">
-🚗 &nbsp; Carrozzeria
-</div>
+    <h2>
+        Hai un'idea per la tua auto?
+        <span style="color:#e10600;">Parliamone.</span>
+    </h2>
 
-<div class="option" onclick="selectService(this)">
-✨ &nbsp; Altro
-</div>
+    <p>
+        Che sia manutenzione, estetica, protezione o performance,
+        partiamo dalla tua esigenza.
+    </p>
 
-
-<input
-class="input"
-placeholder="Note per Dudol Garage"
-/>
-
-
-<button class="btn" onclick="sendBooking()">
-CONTINUA
-</button>
-
-</div>
-
-`,"book");
-
-}
-
-
-function selectService(element){
-
-document
-.querySelectorAll(".option")
-.forEach(x=>x.classList.remove("selected"));
-
-element.classList.add("selected");
-
-selectedService=element.innerText;
-
-}
-
-
-function sendBooking(){
-
-if(!selectedService){
-
-alert("Seleziona prima un servizio.");
-
-return;
-
-}
-
-let toast=document.getElementById("toast");
-
-toast.innerText="Richiesta inviata ✓";
-
-toast.style.display="block";
-
-setTimeout(()=>{
-
-toast.style.display="none";
-
-jobs();
-
-},1000);
-
-}
-
-
-function jobs(){
-
-layout(`
-
-<div class="page">
-
-<div class="back" onclick="home()">
-‹ Home
-</div>
-
-<h1>
-I miei lavori
-</h1>
-
-<div class="page-sub">
-Storico e stato degli interventi
-</div>
-
-
-<div class="card job">
-
-<div>
-
-<strong>
-Controllo generale
-</strong>
-
-<small>
-Toyota Supra A90
-</small>
-
-<small>
-27 agosto 2026
-</small>
-
-</div>
-
-<div class="badge">
-COMPLETATO
-</div>
+    <a href="#contatti" class="btn btn-red">
+        CONTATTACI →
+    </a>
 
 </div>
 
 
-<br>
+<section class="contact" id="contatti">
+
+    <div class="section-label">Contatti</div>
+
+    <h2 class="section-title">Portaci la tua auto.</h2>
+
+    <p class="section-description">
+        Scrivici per informazioni, preventivi o per fissare un appuntamento.
+    </p>
+
+    <div class="contact-grid">
+
+        <div class="contact-card">
+            <small>WhatsApp</small>
+            <strong>Scrivici direttamente</strong>
+
+            <div class="whatsapp">
+                <a
+                    href="https://wa.me/"
+                    class="btn btn-red"
+                    target="_blank"
+                >
+                    APRI WHATSAPP
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <small>Instagram</small>
+            <strong>@dudolgarage</strong>
+
+            <div class="whatsapp">
+                <a
+                    href="https://instagram.com/"
+                    class="btn btn-outline"
+                    target="_blank"
+                >
+                    INSTAGRAM →
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <small>Posizione</small>
+            <strong>Dudol Garage</strong>
+
+            <div class="whatsapp">
+                <a
+                    href="https://maps.google.com/"
+                    class="btn btn-outline"
+                    target="_blank"
+                >
+                    APRI MAPPA →
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <small>Appuntamenti</small>
+            <strong>Prenotazione intervento</strong>
+
+            <div class="whatsapp">
+                <a href="#" class="btn btn-red">
+                    RICHIEDI APPUNTAMENTO
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
 
 
-<div class="card job">
+<footer>
 
-<div>
+    <div>
+        <div class="footer-logo">
+            Dudol<span>Garage</span>
+        </div>
+        <div style="margin-top:8px;">
+            Automotive • Performance • Care
+        </div>
+    </div>
 
-<strong>
-Prossimo intervento
-</strong>
+    <div>
+        © 2026 Dudol Garage
+    </div>
 
-<small>
-Manutenzione consigliata
-</small>
-
-<small>
-Tra circa 10.000 km
-</small>
-
-</div>
-
-<div class="badge">
-DA PRENOTARE
-</div>
-
-</div>
-
-</div>
-
-`,"jobs");
-
-}
-
-
-home();
-
-</script>
+</footer>
 
 </body>
 </html>
